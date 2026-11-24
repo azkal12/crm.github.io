@@ -302,6 +302,10 @@ function pengaturanPage() {
         <div class="data-actions" style="margin-top:12px">
           <button class="btn btn-danger-quiet" type="button" data-action="reset-data">${IC('refresh')}Reset data demo</button>
         </div>
+      <div class="setting-note" style="margin-top:14px">Atau hapus semua data donatur tanpa mengembalikan data contoh: donatur, donasi, komitmen, dan interaksi ikut terhapus. Program, relawan, dan penerima manfaat tetap tersimpan.</div>
+      <div class="data-actions" style="margin-top:12px">
+        <button class="btn btn-danger-quiet" type="button" data-action="wipe-donors">${IC('trash')}Hapus semua data donatur</button>
+      </div>
       </div>
     </section>
   </div>`;
@@ -378,6 +382,24 @@ function downloadBackup() {
   const el = $('#last-backup');
   if (el) el.textContent = fmtStamp(state.settings.lastBackup);
   toast('Cadangan data berhasil diunduh.');
+}
+
+function confirmWipeDonors() {
+  confirmAction({
+    title: 'Hapus semua data donatur?',
+    message: `Semua <b>${state.donors.length}</b> donatur, <b>${state.donations.length}</b> donasi, <b>${state.commitments.length}</b> komitmen, dan <b>${state.interactions.length}</b> interaksi akan dihapus permanen. Data tidak dapat dikembalikan kecuali dari cadangan. Program, relawan, dan penerima manfaat tetap tersimpan.`,
+    confirmLabel: 'Hapus semua',
+    onConfirm() {
+      state.donors = [];
+      state.donations = [];
+      state.commitments = [];
+      state.interactions = [];
+      saveState();
+      closeDrawer();
+      renderRoute();
+      toast('Semua data donatur dihapus.');
+    }
+  });
 }
 
 /* ============================================================

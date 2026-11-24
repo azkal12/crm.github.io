@@ -164,6 +164,7 @@ function handleAction(action, el) {
     case 'export': exportKind(el.dataset.kind || 'donations'); break;
     case 'print-report': window.print(); break;
     case 'reset-data': confirmResetData(); break;
+    case 'wipe-donors': confirmWipeDonors(); break;
     case 'search-open': {
       const type = el.dataset.type;
       closeSearch();
