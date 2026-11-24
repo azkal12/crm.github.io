@@ -338,10 +338,15 @@ function seedData() {
     __version: 3,
     createdAt: new Date().toISOString(),
     settings: { ...DEFAULT_SETTINGS },
-    donors, programs, donations, volunteers, beneficiaries, followups,
-    interactions: seedInteractions({ donors }),
-    commitments: seedCommitments({ donors, programs }),
-    prospects: seedProspects({ programs })
+          donors: [],
+      programs: [],
+      donations: [],
+      volunteers: [],
+      beneficiaries: [],
+      followups: [],
+      interactions: [],
+      commitments: [],
+      prospects: []
   };
 }
 
